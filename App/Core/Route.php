@@ -14,7 +14,8 @@ class Route
             //clean get parameters for correct including controller
             $routes[1] = preg_replace('/[a-z]{1,}=[0-9a-z_]{1,}/', '', $routes[1]);
             $routes[1] = preg_replace('/[&?=_]/', '', $routes[1]);
-
+            $routes[1] = array_map('ucfirst',  explode('-',$routes[1]));
+            $routes[1] = implode('', $routes[1]);
             $controller_name = str_replace('-', '', $routes[1]);
 
 
