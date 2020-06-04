@@ -40,7 +40,7 @@
                     <a class="nav-link" href="/add-task">Добавить задачу</a>
                 </li>
                 <?php
-                if(!isset($_SESSION['logged_in'])){
+                if (!isset($_SESSION['logged_in'])) {
                     ?>
                     <li class="nav-item">
                         <a class="nav-link" href="/login">Войти в аккаунт</a>
@@ -48,7 +48,7 @@
                     <?php
                 }
 
-                if(isset($_SESSION['logged_in'])){
+                if (isset($_SESSION['logged_in'])) {
                     ?>
                     <li class="nav-item">
                         <a class="nav-link" href="/login?logout=1">Выйти</a>
@@ -58,17 +58,33 @@
                 ?>
             </ul>
 
+            <?php
+
+            $options = array(
+                'name_up' => 'Имя: по возрастанию',
+                'name_down' => 'Имя: по убыванию',
+                'email_up' => 'Email: по возрастанию',
+                'email_down' => 'Email: по убыванию',
+                'status_up' => 'Статус: по возрастанию',
+                'status_down' => 'Статус: по убыванию',
+            );
+
+            ?>
+
             <div>
                 <form method="get" action="" style="display: flex; align-items: flex-end;">
                     <div class="form-group">
                         <label for="sorting" style="color:#fff;">Выберите сортировку</label>
                         <select class="form-control" name="sorting" id="sorting">
-                            <option value="name_up">Имя: по возрастанию</option>
-                            <option value="name_down">Имя: по убыванию</option>
-                            <option value="email_up">Email: по возрастанию</option>
-                            <option value="email_down">Email: по убыванию</option>
-                            <option value="status_up">Статус: по возрастанию</option>
-                            <option value="status_down">Статус: по убыванию</option>
+                            <?php
+                            foreach ($options as $key => $option) {
+                                $selected = '';
+                                if ($_GET['sorting'] == $key) {
+                                    $selected = 'selected';
+                                }
+                                echo '<option value="' . $key . '" '.$selected.'>' . $option . '</option>';
+                            }
+                            ?>
                         </select>
                     </div>
                     <div class="form-group">
